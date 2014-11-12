@@ -1,0 +1,20 @@
+{
+  "name": "international-telephone-number",
+  "version": "1.0.0",
+  "homepage": "https://github.com/kyokutyo/international-telephone-number",
+  "authors": [
+    "kyokutyo <haruta@kyokutyo.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/static/bower_components/",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "react": "~0.12.0"
+  }
+}
