@@ -1,5 +1,6 @@
 gulp = require 'gulp'
 react = require 'gulp-react'
+plumber = require 'gulp-plumber'
 browserSync = require 'browser-sync'
 files = ['public/**/*.html', 'public/static/build/*.js']
 
@@ -12,6 +13,7 @@ gulp.task 'browser-sync', ->
 
 gulp.task 'react', ->
   gulp.src 'public/static/js/*.js'
+    .pipe plumber()
     .pipe react()
     .pipe gulp.dest('public/static/build')
 
