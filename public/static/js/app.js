@@ -38,7 +38,7 @@
                 url: this.props.url,
                 dataType: 'json',
                 success: function(data) {
-                    this.setState({countries: data});
+                    this.countries = data;
                 }.bind(this),
                 error: function(xhr, status, err) {
                     console.error(this.props.url, status, err.toString());
@@ -46,12 +46,21 @@
             });
         },
         onChangeHandler: function() {
-            console.log('onChangeHandler');
+            var str = this.refs.code.getDOMNode().value;
+            if(str.length === 0) {
+                this.setState({countries: []});
+                return;
+            }
+            this.setState({
+                countries: this.countries.filter(function(country) {
+                    return (country.code.indexOf(str) !== -1)
+                })
+            });
         },
         render: function() {
             return (
                 <div className="app">
-                    <input type="text" pattern="[0-9]*" name="code" onChange={this.onChangeHandler} />
+                    <input type="text" pattern="[0-9]*" name="code" onChange={this.onChangeHandler} ref="code" />
                     <CountryList countries={this.state.countries} />
                 </div>
             );
