@@ -1,0 +1,67 @@
+@white: #fffff7;
+@light-green: #91ccbe;
+@green: #3da8a4;
+@orange: #ff6643;
+@red: #ff152b;
+
+body {
+  background: @white;
+  color: @green;
+  font-family: 'Hiragino Kaku Gothic ProN' sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+input {
+  background: @light-green;
+  border: 0 @green solid;
+  border-bottom-width: 3px;
+  border-radius: 0;
+  color: @white;
+  font-size: 25px;
+  padding: 4%;
+  width: 92%;
+  &:focus {
+    background: transparent;
+    color: @red;
+  }
+}
+
+::-webkit-input-placeholder {
+  color: @white;
+  font-style: italic;
+  font-family: serif;
+}
+
+.country {
+  // border-bottom: 1px lighten(@orange, 32%) solid;
+  border-bottom: 1px @orange solid;
+  color: @orange;
+  &:after {
+    clear: both;
+    content: '';
+    display: block;
+  }
+}
+
+.code,
+.name {
+  float: left;
+  display: block;
+}
+
+.code {
+  font-size: 16px;
+  padding: 6px 1% 0;
+  width: 18%;
+}
+
+.name {
+  font-size: 22px;
+  width: 80%;
+}
+
+.highlight {
+  background: lighten(@red, 41%);
+  border-bottom: 2px solid @red;
+}
