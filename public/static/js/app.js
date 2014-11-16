@@ -7,8 +7,8 @@
         render: function() {
             return (
                 <div className="country">
-                    <span class="code" dangerouslySetInnerHTML={{__html: this.props.code}} />
-                    <span class="country">{this.props.country}</span>
+                    <span className="code" dangerouslySetInnerHTML={{__html: this.props.code}} />
+                    <span className="name">{this.props.country}</span>
                 </div>
             );
         }
@@ -67,7 +67,7 @@
         render: function() {
             return (
                 <div className="app">
-                    <input type="text" pattern="[0-9]*" name="code" onChange={this.onChangeHandler} ref="code" />
+                    <input type="text" pattern="[0-9]*" name="code" onChange={this.onChangeHandler} ref="code" placeholder="input code # here." />
                     <CountryList countries={this.state.countries} />
                 </div>
             );
