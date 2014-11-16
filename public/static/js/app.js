@@ -8,7 +8,7 @@
             return (
                 <div className="country">
                     <span className="code" dangerouslySetInnerHTML={{__html: this.props.code}} />
-                    <span className="name">{this.props.country}</span>
+                    <span className="name">{this.props.name}</span>
                 </div>
             );
         }
@@ -18,7 +18,7 @@
         render: function() {
             var CountryNodes = this.props.countries.map(function(country) {
                 return (
-                    <Country code={country.code} country={country.country} />
+                    <Country code={country.code} name={country.name} />
                 );
             });
             return (
@@ -80,7 +80,7 @@
     });
 
     React.renderComponent(
-        <App url="/static/data/codes.json" />,
+        <App url="/static/data/countries.json" />,
         document.getElementById('contents')
     );
 }());
