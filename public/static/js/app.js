@@ -7,7 +7,7 @@
         render: function() {
             return (
                 <div className="country">
-                    <span class="code">{this.props.code}</span>
+                    <span class="code" dangerouslySetInnerHTML={{__html: this.props.code}} />
                     <span class="country">{this.props.country}</span>
                 </div>
             );
@@ -47,13 +47,20 @@
         },
         onChangeHandler: function() {
             var str = this.refs.code.getDOMNode().value;
+
             if(str.length === 0) {
                 this.setState({countries: []});
                 return;
             }
+
+            var newCountries = JSON.parse(JSON.stringify(this.countries)); // 値渡し
+
             this.setState({
-                countries: this.countries.filter(function(country) {
-                    return (country.code.indexOf(str) !== -1)
+                countries: newCountries.filter(function(country) {
+                    return (country.code.indexOf(str) !== -1);
+                }).map(function(country) {
+                    country.code = country.code.replace(str, '<span class="highlight">' + str + '</span>')
+                    return country;
                 })
             });
         },
