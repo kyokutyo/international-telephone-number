@@ -22,7 +22,7 @@
                 );
             });
             return (
-                <div className="commentList">
+                <div className="countries">
                     {CountryNodes}
                 </div>
             );
@@ -52,6 +52,7 @@
                 this.setState({countries: []});
                 return;
             }
+            this.hideHeading();
 
             var newCountries = JSON.parse(JSON.stringify(this.countries)); // 値渡し
 
@@ -64,9 +65,13 @@
                 })
             });
         },
+        hideHeading: function() {
+            $('h1').hide('normal');
+        },
         render: function() {
             return (
                 <div className="app">
+                    <h1>International Telephone Number</h1>
                     <input type="text" pattern="[0-9]*" name="code" onChange={this.onChangeHandler} ref="code" placeholder="input code # here." />
                     <CountryList countries={this.state.countries} />
                 </div>
