@@ -2,5 +2,5 @@ node_modules
 scraper/node_modules
 public/static/bower_components/
 public/static/build/
-public/static/data/codes.json
+public/static/data/*.json
 public/static/css
