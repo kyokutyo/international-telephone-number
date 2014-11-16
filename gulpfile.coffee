@@ -3,6 +3,8 @@ react = require 'gulp-react'
 less = require 'gulp-less'
 plumber = require 'gulp-plumber'
 browserSync = require 'browser-sync'
+s3 = require 'gulp-s3'
+fs = require 'fs'
 files = ['public/**/*.html', 'public/static/build/*.js', 'public/static/css/*.css']
 
 gulp.task 'browser-sync', ->
@@ -30,3 +32,8 @@ gulp.task 'watch', ->
   gulp.watch files, browserSync.reload
 
 gulp.task 'default', ['browser-sync', 'watch']
+
+gulp.task 'deploy', ->
+  aws = JSON.parse fs.readFileSync './aws.json'
+  gulp.src './public/**'
+    .pipe s3 aws

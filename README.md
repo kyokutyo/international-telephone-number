@@ -19,15 +19,39 @@ $ node scraper/index.js > public/static/data/countries.json
 
 ## はじめかた
 
-必要なパッケージをインストールする
+必要なパッケージをインストールします
 
 ```
 $ npm install
 $ bower install
 ```
 
-サーバを起動、ファイルを watch する (Google Chrome Canary で開く)
+サーバを起動、ファイルを watch します (Google Chrome Canary で開く)
 
 ```
 $ gulp
+```
+
+## デプロイ
+
+S3 でホスティングしてます
+サンプルファイルをコピーして、 `key` , `secret` を設定します
+
+```
+$ cp aws.json.sample aws.json
+```
+
+```
+{
+    "key": "AKI*****************",
+    "secret": "y2M*************************************",
+    "bucket": "international-telephone-number.kyokutyo.com",
+    "region": "ap-northeast-1"
+}
+```
+
+以下のコマンドで指定の bucket にファイルが配置されます
+
+```
+$ gulp deploy
 ```
