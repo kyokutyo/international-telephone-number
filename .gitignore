@@ -4,3 +4,4 @@ public/static/bower_components/
 public/static/build/
 public/static/data/*.json
 public/static/css
+aws.json
