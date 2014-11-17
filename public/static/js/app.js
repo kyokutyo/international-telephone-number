@@ -50,9 +50,11 @@
 
             if(str.length === 0) {
                 this.setState({countries: []});
+                this.showFooter();
                 return;
             }
             this.hideHeading();
+            this.hideFooter();
 
             var newCountries = JSON.parse(JSON.stringify(this.countries)); // 値渡し
 
@@ -67,6 +69,12 @@
         },
         hideHeading: function() {
             $('h1').hide('normal');
+        },
+        hideFooter: function() {
+            $('footer').hide();
+        },
+        showFooter: function() {
+            $('footer').show();
         },
         render: function() {
             return (
