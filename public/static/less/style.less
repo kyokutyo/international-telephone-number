@@ -80,6 +80,35 @@ input {
 
 footer {
   bottom: 0;
-  padding: 0 15px;
+  padding: 0 1%;
   position: fixed;
+  width: 98%;
+  .whats-this-content {
+    background: @light-green;
+    box-shadow: 3px 3px 5px rgba(99, 99, 99, .3);
+    color: @white;
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 0 auto;
+    padding: 3px 1%;
+    width: 97%;
+    p {
+      margin: 0.2em 0;
+    }
+  }
+  .whats-this-link {
+    float: left;
+    margin: 0;
+    padding: 10px;
+  }
+  .copyright {
+    float: right;
+    margin: 0;
+    padding: 10px;
+    &:after {
+      clear: both;
+      content: '';
+      display: block;
+    }
+  }
 }
