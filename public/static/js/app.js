@@ -34,7 +34,8 @@
             return {
                 countries: [],
                 typedOnce: false,
-                hasResult: false
+                hasResult: false,
+                whatsThisVisible: false
             }
         },
         componentDidMount: function() {
@@ -73,8 +74,13 @@
                 hasResult: !!(newCountries.length)
             });
         },
+        onClickHandler: function() {
+            this.setState({
+                whatsThisVisible: true
+            });
+        },
         render: function() {
-            var header, footer;
+            var header, whatsThisContent, footer;
             if(!this.state.typedOnce) {
                 header = (
                     <header>
@@ -82,10 +88,23 @@
                     </header>
                 );
             }
+            if(this.state.whatsThisVisible) {
+                whatsThisContent = (
+                    <div className="whats-this-content">
+                        <p>
+                            その国際電話番号がどこの国のものなのか調べることができます。
+                            Wikipedia の<a href="http://ja.wikipedia.org/wiki/%E5%9B%BD%E9%9A%9B%E9%9B%BB%E8%A9%B1%E7%95%AA%E5%8F%B7%E3%81%AE%E4%B8%80%E8%A6%A7" target="_blank">国際電話番号の一覧</a>からデータを取得しています。
+                            (データはリアルタイムで同期されているわけではありません)
+                        </p>
+                    </div>
+                );
+            }
             if(!this.state.hasResult) {
                 footer = (
                     <footer>
-                        <p>&copy; kyokutyo (<a href="https://twitter.com/kyokutyo" target="_blank">Twitter</a>)</p>
+                        {whatsThisContent}
+                        <a className="whats-this-link" onClick={this.onClickHandler} href="#">What's this?</a>
+                        <p className="copyright">&copy; kyokutyo (<a href="https://twitter.com/kyokutyo" target="_blank">Twitter</a>)</p>
                     </footer>
                 );
             }
