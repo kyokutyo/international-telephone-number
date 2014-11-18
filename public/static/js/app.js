@@ -31,7 +31,11 @@
 
     var App = React.createClass({
         getInitialState: function() {
-            return {countries: []}
+            return {
+                countries: [],
+                typedOnce: false,
+                hasResult: false
+            }
         },
         componentDidMount: function() {
             $.ajax({
@@ -49,39 +53,48 @@
             var str = this.refs.code.getDOMNode().value;
 
             if(str.length === 0) {
-                this.setState({countries: []});
-                this.showFooter();
+                this.setState({
+                    countries: [],
+                    hasResult: false
+                });
                 return;
             }
-            this.hideHeading();
-            this.hideFooter();
 
             var newCountries = JSON.parse(JSON.stringify(this.countries)); // 値渡し
-
+            newCountries = newCountries.filter(function(country) {
+                return (country.code.indexOf(str) !== -1);
+            }).map(function(country) {
+                country.code = country.code.replace(str, '<span class="highlight">' + str + '</span>')
+                return country;
+            });
             this.setState({
-                countries: newCountries.filter(function(country) {
-                    return (country.code.indexOf(str) !== -1);
-                }).map(function(country) {
-                    country.code = country.code.replace(str, '<span class="highlight">' + str + '</span>')
-                    return country;
-                })
+                countries: newCountries,
+                typedOnce: true,
+                hasResult: !!(newCountries.length)
             });
         },
-        hideHeading: function() {
-            $('h1').hide('normal');
-        },
-        hideFooter: function() {
-            $('footer').hide();
-        },
-        showFooter: function() {
-            $('footer').show();
-        },
         render: function() {
+            var header, footer;
+            if(!this.state.typedOnce) {
+                header = (
+                    <header>
+                        <h1>International Telephone Number</h1>
+                    </header>
+                );
+            }
+            if(!this.state.hasResult) {
+                footer = (
+                    <footer>
+                        <p>&copy; kyokutyo (<a href="https://twitter.com/kyokutyo" target="_blank">Twitter</a>)</p>
+                    </footer>
+                );
+            }
             return (
                 <div className="app">
-                    <h1>International Telephone Number</h1>
+                    {header}
                     <input type="text" pattern="[0-9]*" name="code" onChange={this.onChangeHandler} ref="code" placeholder="input code # here." />
                     <CountryList countries={this.state.countries} />
+                    {footer}
                 </div>
             );
         }
