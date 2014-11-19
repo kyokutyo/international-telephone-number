@@ -111,7 +111,7 @@
             return (
                 <div className="app">
                     {header}
-                    <input type="text" pattern="[0-9]*" name="code" onChange={this.onChangeHandler} ref="code" placeholder="input code # here." />
+                    <input type="number" pattern="[0-9]*" name="code" onChange={this.onChangeHandler} ref="code" placeholder="input code # here." />
                     <CountryList countries={this.state.countries} />
                     {footer}
                 </div>
