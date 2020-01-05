@@ -14,7 +14,10 @@
             tmp_str += '{"code":"' + $code.text() + '",';
             $parent.siblings('td').each(function(index) {
                 var $td  = $(this);
-                var text = $td.text().replace(/\s+\[\d+\]/g, '');
+                var text = $td.text()
+                  .replace(/\s+\[\d+\]/g, '')
+                  .replace(/\"/g, '\\"')
+                  .replace(/[\r\n]/g, '');
 
                 if(index === 0) {
                     tmp_str += '"name":"' + text;
