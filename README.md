@@ -5,16 +5,10 @@
 
 ## 国際電話番号データ(JSON) の作成
 
-### セットアップ
-
-```
-$ cd scraper && npm install
-```
-
 ### スクレイピング
 
 ```
-$ node scraper/index.js > public/static/data/countries.json
+$ npm run update-list
 ```
 
 ## はじめかた
