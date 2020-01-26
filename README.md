@@ -20,10 +20,11 @@ $ npm install
 $ bower install
 ```
 
-サーバを起動、ファイルを watch します (Google Chrome Canary で開く)
+サーバを起動、ファイルを watch します (Google Chrome で開く)
 
 ```
 $ gulp
+$ npm run server
 ```
 
 ## デプロイ
