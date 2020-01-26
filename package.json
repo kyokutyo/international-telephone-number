@@ -16,7 +16,7 @@
   },
   "homepage": "https://github.com/kyokutyo/international-telephone-number",
   "devDependencies": {
-    "browser-sync": "^1.6.5",
+    "browser-sync": "^2.26.7",
     "cheerio-httpcli": "^0.7.4",
     "coffee-script": "^1.8.0",
     "gulp": "^3.8.10",
