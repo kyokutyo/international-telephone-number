@@ -7,13 +7,6 @@ s3 = require 'gulp-s3'
 fs = require 'fs'
 files = ['public/**/*.html', 'public/static/build/*.js', 'public/static/css/*.css']
 
-gulp.task 'browser-sync', ->
-  browserSync.init null,
-    notify: true
-    browser: 'google chrome canary'
-    server:
-      baseDir: 'public'
-
 gulp.task 'react', ->
   gulp.src 'public/static/js/*.js'
     .pipe plumber()
@@ -29,9 +22,8 @@ gulp.task 'less', ->
 gulp.task 'watch', ->
   gulp.watch 'public/static/js/*.js', gulp.task('react')
   gulp.watch 'public/static/less/*.less', gulp.task('less')
-  gulp.watch files, browserSync.reload
 
-gulp.task 'default', gulp.parallel('browser-sync', 'watch')
+gulp.task 'default', gulp.parallel('watch')
 
 gulp.task 'deploy', ->
   aws = JSON.parse fs.readFileSync './aws.json'
