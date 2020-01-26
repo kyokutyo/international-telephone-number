@@ -27,11 +27,11 @@ gulp.task 'less', ->
     .pipe gulp.dest 'public/static/css'
 
 gulp.task 'watch', ->
-  gulp.watch 'public/static/js/*.js', ['react']
-  gulp.watch 'public/static/less/*.less', ['less']
+  gulp.watch 'public/static/js/*.js', gulp.task('react')
+  gulp.watch 'public/static/less/*.less', gulp.task('less')
   gulp.watch files, browserSync.reload
 
-gulp.task 'default', ['browser-sync', 'watch']
+gulp.task 'default', gulp.parallel('browser-sync', 'watch')
 
 gulp.task 'deploy', ->
   aws = JSON.parse fs.readFileSync './aws.json'
