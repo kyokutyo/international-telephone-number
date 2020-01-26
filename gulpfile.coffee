@@ -1,6 +1,6 @@
 gulp = require 'gulp'
 react = require 'gulp-react'
-less = require 'gulp-less'
+sass = require 'gulp-sass'
 plumber = require 'gulp-plumber'
 browserSync = require 'browser-sync'
 s3 = require 'gulp-s3'
@@ -13,15 +13,15 @@ gulp.task 'react', ->
     .pipe react()
     .pipe gulp.dest('public/static/build')
 
-gulp.task 'less', ->
-  gulp.src 'public/static/less/*.less'
+gulp.task 'sass', ->
+  gulp.src 'public/static/scss/*.scss'
     .pipe plumber()
-    .pipe less()
+    .pipe sass()
     .pipe gulp.dest 'public/static/css'
 
 gulp.task 'watch', ->
   gulp.watch 'public/static/js/*.js', gulp.task('react')
-  gulp.watch 'public/static/less/*.less', gulp.task('less')
+  gulp.watch 'public/static/scss/*.scss', gulp.task('sass')
 
 gulp.task 'default', gulp.parallel('watch')
 

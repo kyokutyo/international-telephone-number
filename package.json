@@ -21,9 +21,10 @@
     "cheerio-httpcli": "^0.7.4",
     "coffee-script": "^1.8.0",
     "gulp": "^4.0.2",
-    "gulp-less": "^4.0.1",
     "gulp-plumber": "^0.6.6",
     "gulp-react": "^2.0.0",
-    "gulp-s3": "^0.3.0"
+    "gulp-s3": "^0.3.0",
+    "gulp-sass": "^4.0.2",
+    "node-sass": "^4.13.1"
   }
 }
