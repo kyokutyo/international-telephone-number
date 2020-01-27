@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+import * as React from 'react'
 
 (function() {
     'use strict';

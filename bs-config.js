@@ -10,5 +10,5 @@ module.exports = {
   proxy: false,
   port: 3000,
   startPath: '/',
-  browser: ['Google Chrome']
+  browser: ['Google Chrome', 'Google Chrome Canary']
 }

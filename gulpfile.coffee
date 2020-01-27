@@ -1,17 +1,9 @@
 gulp = require 'gulp'
-react = require 'gulp-react'
 sass = require 'gulp-sass'
 plumber = require 'gulp-plumber'
-browserSync = require 'browser-sync'
 s3 = require 'gulp-s3'
 fs = require 'fs'
-files = ['public/**/*.html', 'public/static/build/*.js', 'public/static/css/*.css']
-
-gulp.task 'react', ->
-  gulp.src 'public/static/js/*.js'
-    .pipe plumber()
-    .pipe react()
-    .pipe gulp.dest('public/static/build')
+files = ['public/**/*.html', 'public/static/css/*.css']
 
 gulp.task 'sass', ->
   gulp.src 'public/static/scss/*.scss'
@@ -20,7 +12,6 @@ gulp.task 'sass', ->
     .pipe gulp.dest 'public/static/css'
 
 gulp.task 'watch', ->
-  gulp.watch 'public/static/js/*.js', gulp.task('react')
   gulp.watch 'public/static/scss/*.scss', gulp.task('sass')
 
 gulp.task 'default', gulp.parallel('watch')
