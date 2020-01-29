@@ -2,7 +2,7 @@ import * as React from 'react'
 
 'use strict';
 
-var Country = React.createClass({
+const Country = React.createClass({
     render: function() {
         return (
             <div className="country">
@@ -13,9 +13,9 @@ var Country = React.createClass({
     }
 });
 
-var CountryList = React.createClass({
+const CountryList = React.createClass({
     render: function() {
-        var CountryNodes = this.props.countries.map(function(country) {
+        const CountryNodes = this.props.countries.map(function (country) {
             return (
                 <Country code={country.code} name={country.name} />
             );
@@ -28,7 +28,7 @@ var CountryList = React.createClass({
     }
 });
 
-var App = React.createClass({
+const App = React.createClass({
     getInitialState: function() {
         return {
             countries: [],
@@ -50,7 +50,7 @@ var App = React.createClass({
         });
     },
     onChangeHandler: function() {
-        var str = this.refs.code.getDOMNode().value;
+        const str = this.refs.code.getDOMNode().value;
 
         if(str.length === 0) {
             this.setState({
@@ -60,7 +60,7 @@ var App = React.createClass({
             return;
         }
 
-        var newCountries = JSON.parse(JSON.stringify(this.countries)); // 値渡し
+        let newCountries = JSON.parse(JSON.stringify(this.countries)); // 値渡し
         newCountries = newCountries.filter(function(country) {
             return (country.code.indexOf(str) !== -1);
         }).map(function(country) {
@@ -79,7 +79,7 @@ var App = React.createClass({
         });
     },
     render: function() {
-        var header, whatsThisContent, footer;
+        let header, whatsThisContent, footer;
         if(!this.state.typedOnce) {
             header = (
                 <header>
