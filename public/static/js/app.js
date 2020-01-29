@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-'use strict';
+'use strict'
 
 const Country = React.createClass({
     render: function() {
@@ -9,24 +9,24 @@ const Country = React.createClass({
                 <span className="code" dangerouslySetInnerHTML={{__html: this.props.code}} />
                 <span className="name">{this.props.name}</span>
             </div>
-        );
+        )
     }
-});
+})
 
 const CountryList = React.createClass({
     render: function() {
         const CountryNodes = this.props.countries.map(function (country) {
             return (
                 <Country code={country.code} name={country.name} />
-            );
-        });
+            )
+        })
         return (
             <div className="countries">
                 {CountryNodes}
             </div>
-        );
+        )
     }
-});
+})
 
 const App = React.createClass({
     getInitialState: function() {
@@ -42,50 +42,50 @@ const App = React.createClass({
             url: this.props.url,
             dataType: 'json',
             success: function(data) {
-                this.countries = data;
+                this.countries = data
             }.bind(this),
             error: function(xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
+                console.error(this.props.url, status, err.toString())
             }.bind(this)
-        });
+        })
     },
     onChangeHandler: function() {
-        const str = this.refs.code.getDOMNode().value;
+        const str = this.refs.code.getDOMNode().value
 
         if(str.length === 0) {
             this.setState({
                 countries: [],
                 hasResult: false
-            });
-            return;
+            })
+            return
         }
 
-        let newCountries = JSON.parse(JSON.stringify(this.countries)); // 値渡し
+        let newCountries = JSON.parse(JSON.stringify(this.countries)) // 値渡し
         newCountries = newCountries.filter(function(country) {
-            return (country.code.indexOf(str) !== -1);
+            return (country.code.indexOf(str) !== -1)
         }).map(function(country) {
             country.code = country.code.replace(str, '<span class="highlight">' + str + '</span>')
-            return country;
-        });
+            return country
+        })
         this.setState({
             countries: newCountries,
             typedOnce: true,
             hasResult: !!(newCountries.length)
-        });
+        })
     },
     onClickHandler: function() {
         this.setState({
             whatsThisVisible: true
-        });
+        })
     },
     render: function() {
-        let header, whatsThisContent, footer;
+        let header, whatsThisContent, footer
         if(!this.state.typedOnce) {
             header = (
                 <header>
                     <h1>International Telephone Number</h1>
                 </header>
-            );
+            )
         }
         if(this.state.whatsThisVisible) {
             whatsThisContent = (
@@ -96,7 +96,7 @@ const App = React.createClass({
                         (データはリアルタイムで同期されているわけではありません)
                     </p>
                 </div>
-            );
+            )
         }
         if(!this.state.hasResult) {
             footer = (
@@ -105,7 +105,7 @@ const App = React.createClass({
                     <a className="whats-this-link" onClick={this.onClickHandler} href="#">What's this?</a>
                     <p className="copyright">&copy; kyokutyo (<a href="https://twitter.com/kyokutyo" target="_blank">Twitter</a>)</p>
                 </footer>
-            );
+            )
         }
         return (
             <div className="app">
@@ -114,11 +114,11 @@ const App = React.createClass({
                 <CountryList countries={this.state.countries} />
                 {footer}
             </div>
-        );
+        )
     }
-});
+})
 
 React.renderComponent(
     <App url="/static/data/countries.json" />,
     document.getElementById('contents')
-);
+)
