@@ -15,7 +15,7 @@ const Country = React.createClass({
 
 const CountryList = React.createClass({
   render: function() {
-    const CountryNodes = this.props.countries.map(function (country) {
+    const CountryNodes = this.props.countries.map(country => {
       return (
         <Country code={country.code} name={country.name} />
       )
@@ -29,14 +29,12 @@ const CountryList = React.createClass({
 })
 
 const App = React.createClass({
-  getInitialState: function() {
-    return {
+  getInitialState: () => ({
       countries: [],
       typedOnce: false,
       hasResult: false,
       whatsThisVisible: false
-    }
-  },
+  }),
   componentDidMount: function() {
     $.ajax({
       url: this.props.url,
@@ -61,9 +59,7 @@ const App = React.createClass({
     }
 
     let newCountries = JSON.parse(JSON.stringify(this.countries)) // 値渡し
-    newCountries = newCountries.filter(function(country) {
-      return (country.code.indexOf(str) !== -1)
-    }).map(function(country) {
+    newCountries = newCountries.filter(country => (country.code.indexOf(str) !== -1)).map(country => {
       country.code = country.code.replace(str, '<span class="highlight">' + str + '</span>')
       return country
     })
