@@ -60,7 +60,7 @@ const App = React.createClass({
 
     let newCountries = JSON.parse(JSON.stringify(this.countries)) // 値渡し
     newCountries = newCountries.filter(country => (country.code.indexOf(str) !== -1)).map(country => {
-      country.code = country.code.replace(str, '<span class="highlight">' + str + '</span>')
+      country.code = country.code.replace(str, `<span class="highlight">${str}</span>`)
       return country
     })
     this.setState({
