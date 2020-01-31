@@ -17,13 +17,13 @@ $ npm run update-list
 
 ```
 $ npm install
-$ bower install
 ```
 
-サーバを起動、ファイルを watch します (Google Chrome Canary で開く)
+サーバを起動、ファイルを watch します (Google Chrome で開く)
 
 ```
-$ gulp
+$ npm run watch
+$ npm run server
 ```
 
 ## デプロイ
@@ -47,5 +47,6 @@ $ cp aws.json.sample aws.json
 以下のコマンドで指定の bucket にファイルが配置されます
 
 ```
+$ npm run build
 $ gulp deploy
 ```

@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "build": "webpack --mode production",
+    "watch": "webpack --mode development -w",
+    "server": "browser-sync start --config bs-config.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "update-list": "node scraper/index.js > public/static/data/countries.json"
   },
@@ -16,13 +19,28 @@
   },
   "homepage": "https://github.com/kyokutyo/international-telephone-number",
   "devDependencies": {
+    "@babel/cli": "^7.8.3",
+    "@babel/core": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "@babel/preset-react": "^7.8.3",
+    "babel-loader": "^8.0.6",
     "browser-sync": "^2.26.7",
     "cheerio-httpcli": "^0.7.4",
     "coffee-script": "^1.8.0",
+    "css-loader": "^3.4.2",
     "gulp": "^4.0.2",
-    "gulp-less": "^4.0.1",
     "gulp-plumber": "^0.6.6",
-    "gulp-react": "^2.0.0",
-    "gulp-s3": "^0.3.0"
+    "gulp-s3": "^0.3.0",
+    "gulp-sass": "^4.0.2",
+    "ky": "^0.16.2",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^4.13.1",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "react": "^0.12.2",
+    "react-dom": "^16.12.0",
+    "sass-loader": "^8.0.2",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-fix-style-only-entries": "^0.4.0"
   }
 }
