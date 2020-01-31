@@ -17,7 +17,6 @@ $ npm run update-list
 
 ```
 $ npm install
-$ bower install
 ```
 
 サーバを起動、ファイルを watch します (Google Chrome で開く)
