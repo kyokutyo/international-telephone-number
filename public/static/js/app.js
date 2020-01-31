@@ -1,4 +1,5 @@
 import * as React from 'react'
+import ky from 'ky'
 
 'use strict'
 
@@ -35,16 +36,11 @@ const App = React.createClass({
       hasResult: false,
       whatsThisVisible: false
   }),
-  componentDidMount: function() {
-    $.ajax({
-      url: this.props.url,
-      dataType: 'json',
-      success: function(data) {
-        this.countries = data
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString())
-      }.bind(this)
+  componentDidMount: function () {
+    ky.get(this.props.url).json().then(data => {
+      this.countries = data
+    }).catch(err => {
+      console.error(err.message)
     })
   },
   onChangeHandler: function() {
