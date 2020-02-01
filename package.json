@@ -6,6 +6,7 @@
     "build": "webpack --mode production",
     "watch": "webpack --mode development -w",
     "server": "browser-sync start --config bs-config.js",
+    "prettier": "prettier --write 'public/static/js/**/*.js' && prettier --write 'public/static/scss/**/*.scss'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "update-list": "node scraper/index.js > public/static/data/countries.json"
   },
@@ -32,6 +33,7 @@
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.13.1",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "prettier": "1.19.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "sass-loader": "^8.0.2",
