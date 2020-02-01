@@ -110,7 +110,7 @@ const App = React.createClass({
   }
 })
 
-React.renderComponent(
+React.render(
   <App url="/static/data/countries.json" />,
   document.getElementById('contents')
 )
