@@ -3,8 +3,6 @@ update_configs:
   - package_manager: "javascript"
     directory: "/"
     update_schedule: "live"
-    default_reviewers:
-      - "kyokutyo"
     default_assignees:
       - "kyokutyo"
     allowed_updates:
