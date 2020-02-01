@@ -1,10 +1,11 @@
 import * as React from 'react'
 import ReactDOM from 'react-dom'
+import createReactClass from 'create-react-class'
 import ky from 'ky'
 
 'use strict'
 
-const Country = React.createClass({
+const Country = createReactClass({
   render: function() {
     return (
       <div className="country">
@@ -15,7 +16,7 @@ const Country = React.createClass({
   }
 })
 
-const CountryList = React.createClass({
+const CountryList = createReactClass({
   render: function() {
     const CountryNodes = this.props.countries.map((country, idx) => {
       return (
@@ -30,7 +31,7 @@ const CountryList = React.createClass({
   }
 })
 
-const App = React.createClass({
+const App = createReactClass({
   getInitialState: () => ({
       countries: [],
       typedOnce: false,
