@@ -1,4 +1,5 @@
 import * as React from 'react'
+import ReactDOM from 'react-dom'
 import ky from 'ky'
 
 'use strict'
@@ -16,9 +17,9 @@ const Country = React.createClass({
 
 const CountryList = React.createClass({
   render: function() {
-    const CountryNodes = this.props.countries.map(country => {
+    const CountryNodes = this.props.countries.map((country, idx) => {
       return (
-        <Country code={country.code} name={country.name} />
+        <Country key={idx} code={country.code} name={country.name} />
       )
     })
     return (
@@ -44,7 +45,7 @@ const App = React.createClass({
     })
   },
   onChangeHandler: function() {
-    const str = this.refs.code.getDOMNode().value
+    const str = this.refs.code.value
 
     if(str.length === 0) {
       this.setState({
@@ -110,7 +111,7 @@ const App = React.createClass({
   }
 })
 
-React.renderComponent(
+ReactDOM.render(
   <App url="/static/data/countries.json" />,
   document.getElementById('contents')
 )
