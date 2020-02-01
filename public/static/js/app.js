@@ -2,10 +2,15 @@ import * as React from "react";
 import ReactDOM from "react-dom";
 import createReactClass from "create-react-class";
 import ky from "ky";
+import PropTypes from "prop-types";
 
 ("use strict");
 
 const Country = createReactClass({
+  propTypes: {
+    code: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  },
   render: function() {
     return (
       <div className="country">
@@ -20,6 +25,12 @@ const Country = createReactClass({
 });
 
 const CountryList = createReactClass({
+  propTypes: {
+    countries: PropTypes.arrayOf(PropTypes.shape({
+      code: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired
+    }))
+  },
   render: function() {
     const CountryNodes = this.props.countries.map((country, idx) => {
       return <Country key={idx} code={country.code} name={country.name} />;
@@ -29,6 +40,9 @@ const CountryList = createReactClass({
 });
 
 const App = createReactClass({
+  propTypes: {
+    url: PropTypes.string.isRequired
+  },
   getInitialState: () => ({
     countries: [],
     typedOnce: false,
@@ -46,7 +60,7 @@ const App = createReactClass({
       });
   },
   onChangeHandler: function() {
-    const str = this.refs.code.value;
+    const str = this.code.value;
 
     if (str.length === 0) {
       this.setState({
@@ -95,6 +109,7 @@ const App = createReactClass({
             <a
               href="http://ja.wikipedia.org/wiki/%E5%9B%BD%E9%9A%9B%E9%9B%BB%E8%A9%B1%E7%95%AA%E5%8F%B7%E3%81%AE%E4%B8%80%E8%A6%A7"
               target="_blank"
+              rel="noopener noreferrer"
             >
               国際電話番号の一覧
             </a>
@@ -109,11 +124,11 @@ const App = createReactClass({
         <footer>
           {whatsThisContent}
           <a className="whats-this-link" onClick={this.onClickHandler} href="#">
-            What's this?
+            What&apos;s this?
           </a>
           <p className="copyright">
             &copy; kyokutyo (
-            <a href="https://twitter.com/kyokutyo" target="_blank">
+            <a href="https://twitter.com/kyokutyo" target="_blank" rel="noopener noreferrer">
               Twitter
             </a>
             )
@@ -129,7 +144,7 @@ const App = createReactClass({
           pattern="[0-9]*"
           name="code"
           onChange={this.onChangeHandler}
-          ref="code"
+          ref={c => { this.code = c }}
           placeholder="input code # here."
         />
         <CountryList countries={this.state.countries} />
