@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { CountryList } from './CountryList'
-import ky from 'ky'
+import { CountryList } from "./CountryList";
+import ky from "ky";
 import PropTypes from "prop-types";
 
 export const App = props => {
   let countriesAll = [];
-  const [countries, setCountries] = useState([])
-  const [typedOnce, setTypedOnce] = useState(false)
-  const [hasResult, setHasResult] = useState(false)
-  const [whatsThisVisible, setWhatsThisVisible] = useState(false)
+  const [countries, setCountries] = useState([]);
+  const [typedOnce, setTypedOnce] = useState(false);
+  const [hasResult, setHasResult] = useState(false);
+  const [whatsThisVisible, setWhatsThisVisible] = useState(false);
   useEffect(() => {
     ky.get(props.url)
       .json()
@@ -18,22 +18,24 @@ export const App = props => {
       .catch(err => {
         console.error(err.message);
       });
-  })
-  const highlight = s => `<span class="highlight">${s}</span>`
+  });
+  const highlight = s => `<span class="highlight">${s}</span>`;
   const onChangeHandler = e => {
     const str = e.target.value;
     if (str.length === 0) {
-      setCountries([])
-      setHasResult(false)
+      setCountries([]);
+      setHasResult(false);
       return;
     }
-    const newCountries = countriesAll.filter(country => country.code.indexOf(str) !== -1).map(country => {
-      country.code = country.code.replace(str, highlight(str));
-      return country;
-    })
-    setCountries(newCountries)
-    setTypedOnce(true)
-    setHasResult(!!newCountries.length)
+    const newCountries = countriesAll
+      .filter(country => country.code.indexOf(str) !== -1)
+      .map(country => {
+        country.code = country.code.replace(str, highlight(str));
+        return country;
+      });
+    setCountries(newCountries);
+    setTypedOnce(true);
+    setHasResult(!!newCountries.length);
   };
 
   let header, whatsThisContent, footer;
@@ -48,8 +50,8 @@ export const App = props => {
     whatsThisContent = (
       <div className="whats-this-content">
         <p>
-          その国際電話番号がどこの国のものなのか調べることができます。
-          Wikipedia の
+          その国際電話番号がどこの国のものなのか調べることができます。 Wikipedia
+          の
           <a
             href="http://ja.wikipedia.org/wiki/%E5%9B%BD%E9%9A%9B%E9%9B%BB%E8%A9%B1%E7%95%AA%E5%8F%B7%E3%81%AE%E4%B8%80%E8%A6%A7"
             target="_blank"
@@ -65,7 +67,7 @@ export const App = props => {
   }
   if (!hasResult) {
     const onClickHandler = () => {
-      setWhatsThisVisible(true)
+      setWhatsThisVisible(true);
     };
     footer = (
       <footer>
@@ -75,7 +77,11 @@ export const App = props => {
         </a>
         <p className="copyright">
           &copy; kyokutyo (
-          <a href="https://twitter.com/kyokutyo" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://twitter.com/kyokutyo"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Twitter
           </a>
           )
@@ -101,4 +107,4 @@ export const App = props => {
 
 App.propTypes = {
   url: PropTypes.string.isRequired
-}
+};

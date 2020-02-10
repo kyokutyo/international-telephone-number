@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Country } from './Country'
-import PropTypes from 'prop-types'
+import { Country } from "./Country";
+import PropTypes from "prop-types";
 
 export const CountryList = props => {
   const CountryNodes = props.countries.map((country, idx) => {
@@ -10,8 +10,10 @@ export const CountryList = props => {
 };
 
 CountryList.propTypes = {
-  countries: PropTypes.arrayOf(PropTypes.shape({
-    code: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
-  }))
+  countries: PropTypes.arrayOf(
+    PropTypes.shape({
+      code: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired
+    })
+  )
 };
