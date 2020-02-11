@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { Header } from "./Header";
 import { CountryList } from "./CountryList";
+import { Footer } from "./Footer";
 import ky from "ky";
 import PropTypes from "prop-types";
 
@@ -8,7 +10,6 @@ export const App = props => {
   const [countries, setCountries] = useState([]);
   const [typedOnce, setTypedOnce] = useState(false);
   const [hasResult, setHasResult] = useState(false);
-  const [whatsThisVisible, setWhatsThisVisible] = useState(false);
   useEffect(() => {
     ky.get(props.url)
       .json()
@@ -37,61 +38,9 @@ export const App = props => {
     setTypedOnce(true);
     setHasResult(!!newCountries.length);
   };
-
-  let header, whatsThisContent, footer;
-  if (!typedOnce) {
-    header = (
-      <header>
-        <h1>International Telephone Number</h1>
-      </header>
-    );
-  }
-  if (whatsThisVisible) {
-    whatsThisContent = (
-      <div className="whats-this-content">
-        <p>
-          その国際電話番号がどこの国のものなのか調べることができます。 Wikipedia
-          の
-          <a
-            href="http://ja.wikipedia.org/wiki/%E5%9B%BD%E9%9A%9B%E9%9B%BB%E8%A9%B1%E7%95%AA%E5%8F%B7%E3%81%AE%E4%B8%80%E8%A6%A7"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            国際電話番号の一覧
-          </a>
-          からデータを取得しています。
-          (データはリアルタイムで同期されているわけではありません)
-        </p>
-      </div>
-    );
-  }
-  if (!hasResult) {
-    const onClickHandler = () => {
-      setWhatsThisVisible(true);
-    };
-    footer = (
-      <footer>
-        {whatsThisContent}
-        <a className="whats-this-link" onClick={onClickHandler} href="#">
-          What&apos;s this?
-        </a>
-        <p className="copyright">
-          &copy; kyokutyo (
-          <a
-            href="https://twitter.com/kyokutyo"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Twitter
-          </a>
-          )
-        </p>
-      </footer>
-    );
-  }
   return (
     <div className="app">
-      {header}
+      {typedOnce ? null : <Header />}
       <input
         type="number"
         pattern="[0-9]*"
@@ -100,7 +49,7 @@ export const App = props => {
         placeholder="input code # here."
       />
       <CountryList countries={countries} />
-      {footer}
+      {hasResult ? null : <Footer />}
     </div>
   );
 };
