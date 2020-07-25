@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Header } from "./Header";
 import { CountryList } from "./CountryList";
 import { Footer } from "./Footer";
+import PropTypes from "prop-types";
 
 export const App = props => {
   const countriesAll = props.countries
@@ -41,3 +42,10 @@ export const App = props => {
     </div>
   );
 };
+
+App.propTypes = {
+  countries: PropTypes.arrayOf(PropTypes.exact({
+    code: PropTypes.string,
+    name: PropTypes.string
+  })).isRequired
+}
