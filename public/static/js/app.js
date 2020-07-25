@@ -1,10 +1,18 @@
 import * as React from "react";
 import ReactDOM from "react-dom";
 import { App } from "./components/App";
+import ky from "ky";
 
 ("use strict");
 
-ReactDOM.render(
-  <App url="/static/data/countries.json" />,
-  document.getElementById("contents")
-);
+ky.get('/static/data/countries.json')
+  .json()
+  .then(data => {
+    ReactDOM.render(
+      <App countries={data} />,
+      document.getElementById("contents")
+    );
+  })
+  .catch(err => {
+    console.error(err.message);
+  });

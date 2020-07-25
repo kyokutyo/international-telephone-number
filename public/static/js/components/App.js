@@ -1,25 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Header } from "./Header";
 import { CountryList } from "./CountryList";
 import { Footer } from "./Footer";
-import ky from "ky";
-import PropTypes from "prop-types";
 
 export const App = props => {
-  let countriesAll = [];
+  const countriesAll = props.countries
   const [countries, setCountries] = useState([]);
   const [typedOnce, setTypedOnce] = useState(false);
   const [hasResult, setHasResult] = useState(false);
-  useEffect(() => {
-    ky.get(props.url)
-      .json()
-      .then(data => {
-        countriesAll = data;
-      })
-      .catch(err => {
-        console.error(err.message);
-      });
-  });
   const highlight = s => `<span class="highlight">${s}</span>`;
   const onChangeHandler = e => {
     const str = e.target.value;
@@ -29,11 +17,11 @@ export const App = props => {
       return;
     }
     const newCountries = countriesAll
-      .filter(country => country.code.indexOf(str) !== -1)
-      .map(country => {
-        country.code = country.code.replace(str, highlight(str));
-        return country;
-      });
+      .filter(country => country.code.includes(str))
+      .map(country => ({
+        ...country,
+        code: country.code.replace(str, highlight(str))
+      }));
     setCountries(newCountries);
     setTypedOnce(true);
     setHasResult(!!newCountries.length);
@@ -52,8 +40,4 @@ export const App = props => {
       {hasResult ? null : <Footer />}
     </div>
   );
-};
-
-App.propTypes = {
-  url: PropTypes.string.isRequired
 };
