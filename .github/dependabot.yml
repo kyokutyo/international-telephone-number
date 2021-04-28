@@ -1,0 +1,26 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "20:00"
+  open-pull-requests-limit: 10
+  reviewers:
+  - kyokutyo
+  assignees:
+  - kyokutyo
+  versioning-strategy: lockfile-only
+  ignore:
+  - dependency-name: regjsparser
+    versions:
+    - 0.6.6
+    - 0.6.7
+    - 0.6.8
+  - dependency-name: esquery
+    versions:
+    - 1.3.1
+  commit-message:
+    prefix: fix
+    prefix-development: chore
+    include: scope
